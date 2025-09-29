@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tab Favicon Labeler - Configuration</title>
+  <link rel="stylesheet" href="styles/options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-content">
+        <div class="title-section">
+          <h1>
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L2 7V10C2 16 6 20.9 12 22C18 20.9 22 16 22 10V7L12 2M12 4.3L20 8.5V10C20 15.1 16.8 19.3 12 20.8C7.2 19.3 4 15.1 4 10V8.5L12 4.3Z"/>
+            </svg>
+            Tab Favicon Labeler
+          </h1>
+          <p class="subtitle">Create custom favicon labels for your tabs based on URL patterns</p>
+        </div>
+        <div class="header-actions">
+          <button id="export-btn" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+            </svg>
+            Export
+          </button>
+          <button id="import-btn" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+            </svg>
+            Import
+          </button>
+          <input type="file" id="import-file" accept=".json" hidden>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="example-section">
+        <div class="example-card">
+          <h3>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"/>
+            </svg>
+            How it works
+          </h3>
+          <div class="example-content">
+            <div class="example-item">
+              <div class="example-favicon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <span>STG</span>
+              </div>
+              <div class="example-text">
+                <strong>Label:</strong> STAGE<br>
+                <strong>Pattern:</strong> <code>https?://stage\.application\.com/.*</code>
+              </div>
+            </div>
+            <div class="example-item">
+              <div class="example-favicon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <span>PRD</span>
+              </div>
+              <div class="example-text">
+                <strong>Label:</strong> PROD<br>
+                <strong>Pattern:</strong> <code>https?://prod\.application\.com/.*</code>
+              </div>
+            </div>
+          </div>
+          <p class="example-note">
+            Labels support up to 6 characters, displayed as 3 per line. Perfect for environment indicators!
+          </p>
+        </div>
+      </div>
+
+      <div class="rules-section">
+        <div class="section-header">
+          <h2>Configuration Rules</h2>
+          <button id="add-rule" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/>
+            </svg>
+            Add Rule
+          </button>
+        </div>
+        <div id="rules-container" class="rules-container"></div>
+      </div>
+    </main>
+
+    <div class="floating-actions">
+      <button id="save-rules" class="btn btn-success btn-large">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z"/>
+        </svg>
+        Save All Rules
+        <span class="kbd">Ctrl+S</span>
+      </button>
+    </div>
+
+    <div id="status-container"></div>
+  </div>
+
+  <!-- Export Modal -->
+  <div id="export-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Export Configuration</h2>
+        <button class="modal-close" id="export-close">×</button>
+      </div>
+      <div class="modal-body">
+        <p>Copy the configuration below or download it as a file:</p>
+        <textarea id="export-data" readonly placeholder="Configuration will appear here..."></textarea>
+        <div class="modal-actions">
+          <button id="copy-export" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"/>
+            </svg>
+            Copy to Clipboard
+          </button>
+          <button id="download-export" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+            </svg>
+            Download File
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

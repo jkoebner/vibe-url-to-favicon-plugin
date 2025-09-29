@@ -1,0 +1,246 @@
+/* Reset and base styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1f2937;
+  width: 320px;
+  background: white;
+}
+
+/* Popup Container */
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+/* Header */
+.popup-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 1rem;
+}
+
+.popup-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.popup-title .icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  opacity: 0.9;
+}
+
+/* Content */
+.popup-content {
+  padding: 1rem;
+  flex: 1;
+}
+
+/* Status Section */
+.status-section {
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  border: 1px solid;
+  transition: all 0.2s ease;
+}
+
+.status-badge.active {
+  background: linear-gradient(135deg, #d4f7db 0%, #c6f6d5 100%);
+  border-color: #9ae6b4;
+  color: #276749;
+}
+
+.status-badge.inactive {
+  background: #f7fafc;
+  border-color: #e2e8f0;
+  color: #718096;
+}
+
+/* Preview Section */
+.preview-section {
+  margin-bottom: 1rem;
+}
+
+.preview-header {
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.preview-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.preview-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e0;
+}
+
+.preview-favicon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.625rem;
+  line-height: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.preview-favicon .line1,
+.preview-favicon .line2 {
+  display: block;
+  height: 8px;
+  line-height: 8px;
+}
+
+.preview-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.preview-description {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.preview-pattern {
+  font-size: 0.75rem;
+  color: #718096;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Actions Section */
+.actions-section {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+/* Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  color: #718096;
+  font-style: italic;
+  padding: 1rem;
+}
+
+/* Focus styles for accessibility */
+.btn:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 350px) {
+  body {
+    width: 280px;
+  }
+  
+  .popup-content {
+    padding: 0.75rem;
+  }
+}
