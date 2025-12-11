@@ -114,7 +114,13 @@
   // Get matching rule for current URL
   async function getMatchingRule() {
     try {
-      const result = await storage.local.get(['faviconRules']);
+      const result = await storage.local.get(['faviconRules', 'extensionEnabled']);
+      const isEnabled = result.extensionEnabled !== false;
+      
+      if (!isEnabled) {
+        return null;
+      }
+      
       const rules = result.faviconRules || [];
       const url = window.location.href;
       
@@ -189,7 +195,14 @@
   
   // Listen for storage changes
   storage.onChanged.addListener((changes, namespace) => {
-    if (namespace === 'local' && changes.faviconRules) {
+    if (namespace === 'local' && (changes.faviconRules || changes.extensionEnabled)) {
+      updateFavicon();
+    }
+  });
+  
+  // Listen for messages from popup
+  (browser.runtime || chrome.runtime).onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'toggleExtension') {
       updateFavicon();
     }
   });

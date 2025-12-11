@@ -1,12 +1,14 @@
 {
   "manifest_version": 2,
   "name": "Tab Favicon Labeler",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Add custom favicon labels to tabs based on URL patterns",
+  "author": "Joel Köbner",
+  "homepage_url": "https://github.com/jkoebner/vibe-url-to-favicon-plugin",
   
   "applications": {
     "gecko": {
-      "id": "tab-favicon-labeler@yourname.com"
+      "id": "tab-favicon-labeler@extension.local"
     }
   },
   
@@ -38,6 +40,17 @@
   
   "browser_action": {
     "default_title": "Tab Favicon Labeler",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon48.png"
+    }
+  },
+  
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png",
+    "512": "icon512.png"
   }
 }
