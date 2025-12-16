@@ -16,8 +16,8 @@ html {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.4;
   color: #1f2937;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
@@ -36,7 +36,7 @@ body {
 .header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 2rem;
+  padding: 1.25rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -44,27 +44,27 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 1.25rem;
 }
 
 .title-section h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .title-section .icon {
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   opacity: 0.9;
 }
 
 .subtitle {
   opacity: 0.9;
-  font-size: 1rem;
+  font-size: 0.875rem;
   max-width: 500px;
 }
 
@@ -76,26 +76,26 @@ body {
 
 /* Main Content */
 .main-content {
-  padding: 2rem;
+  padding: 1.25rem;
 }
 
 /* Example Section */
 .example-section {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .example-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1.5rem;
+  border-radius: 8px;
+  padding: 1rem;
 }
 
 .example-card h3 {
   color: #475569;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -109,32 +109,32 @@ body {
 
 .example-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .example-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.75rem;
+  padding: 0.75rem;
   background: white;
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .example-favicon {
-  width: 48px;
-  height: 48px;
-  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .example-text {
@@ -159,18 +159,18 @@ body {
 
 /* Rules Section */
 .rules-section {
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .section-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #1f2937;
 }
@@ -178,7 +178,7 @@ body {
 .rules-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .rules-container:empty::before {
@@ -193,12 +193,20 @@ body {
   border-radius: 12px;
 }
 
+.add-rule-bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
 /* Rule Item */
 .rule-item {
   background: white;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1.5rem;
+  border-radius: 8px;
+  padding: 1rem;
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
@@ -234,18 +242,41 @@ body {
   background: #9ca3af;
 }
 
+/* Drag states */
+.rule-item.dragging {
+  opacity: 0.5;
+  transform: rotate(2deg);
+}
+
+.rule-item.drag-over-top {
+  border-top: 3px solid #667eea;
+}
+
+.rule-item.drag-over-bottom {
+  border-bottom: 3px solid #667eea;
+}
+
+.rule-item[draggable="true"] {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.rule-item[draggable="true"]:not(.dragging):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.15);
+}
+
 /* Form Elements */
 .form-row {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: flex-end;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.375rem;
 }
 
 .form-group.flex-1 {
@@ -268,10 +299,10 @@ body {
 
 .form-group input,
 .form-group textarea {
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 0.9rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
   transition: all 0.2s ease;
   background: white;
 }
@@ -298,16 +329,16 @@ body {
 
 .form-group textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 60px;
   font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 .checkbox-group {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .checkbox-group input[type="checkbox"] {
@@ -324,20 +355,20 @@ body {
 
 /* Preview Favicon */
 .preview-favicon {
-  width: 56px;
-  height: 56px;
-  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   line-height: 1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   transition: transform 0.2s ease;
 }
 
@@ -346,22 +377,34 @@ body {
 }
 
 .preview-favicon .line1,
-.preview-favicon .line2 {
+.preview-favicon .line2,
+.preview-favicon .line3 {
   display: block;
-  height: 12px;
-  line-height: 12px;
+  height: 10px;
+  line-height: 10px;
+}
+
+.preview-favicon.small-font {
+  font-size: 0.55rem;
+}
+
+.preview-favicon.small-font .line1,
+.preview-favicon.small-font .line2,
+.preview-favicon.small-font .line3 {
+  height: 8px;
+  line-height: 8px;
 }
 
 /* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
   font-weight: 500;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
@@ -433,8 +476,8 @@ body {
 }
 
 .btn-large {
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
 }
 
 .kbd {
@@ -452,6 +495,34 @@ body {
   bottom: 2rem;
   right: 2rem;
   z-index: 100;
+}
+
+/* Drag Handle */
+.drag-handle {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: grab;
+  color: #9ca3af;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drag-handle:hover {
+  color: #667eea;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-handle svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .delete-btn {

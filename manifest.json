@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Tab Favicon Labeler",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Add custom favicon labels to tabs based on URL patterns",
   "author": "Joel Köbner",
   "homepage_url": "https://github.com/jkoebner/vibe-url-to-favicon-plugin",

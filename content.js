@@ -7,8 +7,8 @@
   let originalFavicon = null;
   let observer = null;
   
-  // Create canvas favicon with text (up to 6 chars, 3 per line)
-  function createTextFavicon(text, backgroundColor = '#667eea', foregroundColor = '#ffffff') {
+  // Create canvas favicon with text
+  function createTextFavicon(text, backgroundColor = '#667eea', foregroundColor = '#ffffff', fontSize = 'large-sans') {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     
@@ -29,16 +29,30 @@
     ctx.strokeRect(0.5, 0.5, 31, 31);
     ctx.globalAlpha = 1.0;
     
-    // Prepare text
+    // Prepare text based on font size
     const upperText = text.toUpperCase();
-    const line1 = upperText.substring(0, 3);
-    const line2 = upperText.substring(3, 6);
+    let lines = [];
+    let fontFamily = fontSize.includes('serif') ? 'serif' : '-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif';
+    
+    if (fontSize.startsWith('small')) {
+      // Small: 3 lines, 4 chars each
+      lines = [
+        upperText.substring(0, 4),
+        upperText.substring(4, 8),
+        upperText.substring(8, 12)
+      ].filter(line => line.length > 0);
+    } else {
+      // Large: 2 lines, 3 chars each
+      lines = [
+        upperText.substring(0, 3),
+        upperText.substring(3, 6)
+      ].filter(line => line.length > 0);
+    }
     
     // Set text properties
     ctx.fillStyle = foregroundColor;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = 'bold 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif';
     
     // Add text shadow for better readability
     ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
@@ -47,14 +61,23 @@
     ctx.shadowOffsetY = 1;
     
     // Draw text lines
-    if (line2) {
-      // Two lines
-      ctx.fillText(line1, 16, 11);
-      ctx.fillText(line2, 16, 21);
+    if (fontSize.startsWith('small')) {
+      ctx.font = `bold 7px ${fontFamily}`;
+      const lineHeight = 8;
+      const startY = 16 - ((lines.length - 1) * lineHeight / 2);
+      
+      lines.forEach((line, i) => {
+        ctx.fillText(line, 16, startY + (i * lineHeight));
+      });
     } else {
-      // Single line (centered)
-      ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif';
-      ctx.fillText(line1, 16, 16);
+      ctx.font = `bold 10px ${fontFamily}`;
+      if (lines.length === 2) {
+        ctx.fillText(lines[0], 16, 11);
+        ctx.fillText(lines[1], 16, 21);
+      } else {
+        ctx.font = `bold 12px ${fontFamily}`;
+        ctx.fillText(lines[0], 16, 16);
+      }
     }
     
     return canvas.toDataURL('image/png');
@@ -156,7 +179,8 @@
         const faviconData = createTextFavicon(
           rule.label, 
           rule.backgroundColor || '#667eea', 
-          rule.foregroundColor || '#ffffff'
+          rule.foregroundColor || '#ffffff',
+          rule.fontSize || 'large-sans'
         );
         setFavicon(faviconData);
         console.log('Applied custom favicon:', rule.label);
